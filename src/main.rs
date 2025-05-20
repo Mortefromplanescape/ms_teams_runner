@@ -177,8 +177,8 @@ pub extern "system" fn mainCRTStartup() {
             unsafe {
                 MessageBoxW(
                     0,
-                    wide_string_const("Chrome not found in:\n- Program Files\n- Program Files (x86)\n- LocalAppData"),
-                    wide_string_const("Error"),
+                    wide_string_const("       MS Edge, Chrome or Chromium should be installed to continue..."),
+                    wide_string_const("Error!\n"),
                     0x00000010,
                 );
             }
