@@ -1,0 +1,14 @@
+[package]
+name = "ms_teams_runner"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1.12"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = 'abort'
