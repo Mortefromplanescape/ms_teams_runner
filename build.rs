@@ -8,8 +8,7 @@ fn main() {
         .set("InternalName", "MS_TEAMS_RUNNER")
         .set("ProductName", "Microsoft Teams Runner");
     res.compile().unwrap();
-}		
+}
 
 #[cfg(unix)]
-fn main() {
-}
+fn main() {}
