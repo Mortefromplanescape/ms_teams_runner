@@ -5,12 +5,13 @@ edition = "2021"
 authors = ["Alexey Boreyko"]
 build = "build.rs"
 
+[dependencies]
+walkdir = "2.3.2"
+winapi = { version = "0.3", features = ["winbase", "winuser", "errhandlingapi"] }
+shellexpand = "3.0.0"
+
 [target.'cfg(windows)'.build-dependencies]
 winres = "0.1.12"
-
-[dependencies]
-winapi = { version = "0.3", features = ["winbase", "winuser", "processenv", "shellapi", "errhandlingapi"] }
-shellexpand = "1.1.0"
 
 [profile.release]
 opt-level = 3

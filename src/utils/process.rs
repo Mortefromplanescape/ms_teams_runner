@@ -1,11 +1,13 @@
+use std::path::Path;
 use winapi::um::processthreadsapi::{CreateProcessW, PROCESS_INFORMATION, STARTUPINFOW};
 use winapi::um::winbase::{CREATE_NO_WINDOW, CREATE_UNICODE_ENVIRONMENT};
 use std::ptr;
-use crate::utils::strings;
+use crate::utils;
 
-pub fn execute_browser(path: &str, url: &str) -> Result<(), String> {
-    let command = format!("\"{}\" --app={}", path, url);
-    let mut command_line = strings::to_wide(&command);
+pub fn launch_browser(path: &Path) -> Result<(), String> {
+    let url = "https://teams.live.com/v2";
+    let command = format!("\"{}\" --app=\"{}\"", path.display(), url);
+    let mut command_line = utils::to_wide(&command);
     
     let mut si: STARTUPINFOW = unsafe { std::mem::zeroed() };
     si.cb = std::mem::size_of::<STARTUPINFOW>() as u32;
@@ -30,6 +32,10 @@ pub fn execute_browser(path: &str, url: &str) -> Result<(), String> {
     if success != 0 {
         Ok(())
     } else {
-        Err(format!("Ошибка запуска: {}", crate::utils::error::last_error()))
+        Err(format!("Launch error: {}", utils::error::last_error()))
     }
+}
+
+pub fn to_wide(s: &str) -> Vec<u16> {
+    s.encode_utf16().chain(std::iter::once(0)).collect()
 }

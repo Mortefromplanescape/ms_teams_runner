@@ -1,9 +1,10 @@
 use winapi::um::winuser::MessageBoxW;
 use std::ptr;
+use crate::utils;
 
 pub fn show_error(msg: &str) {
-    let wide_msg = crate::utils::strings::to_wide(msg);
-    let wide_title = crate::utils::strings::to_wide("Ошибка");
+    let wide_msg = utils::to_wide(msg);
+    let wide_title = utils::to_wide("Error");
     
     unsafe {
         MessageBoxW(
@@ -13,9 +14,4 @@ pub fn show_error(msg: &str) {
             0x00000010,
         );
     }
-}
-
-pub fn last_error() -> String {
-    let error_code = unsafe { winapi::um::errhandlingapi::GetLastError() };
-    format!("Код ошибки: {}", error_code)
 }

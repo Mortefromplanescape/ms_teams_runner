@@ -1,13 +1,10 @@
-mod app;
-mod constants;
-mod process;
+mod browser_finder;
 mod utils;
 
-use crate::app::run;
-use crate::utils::error::show_error;
+use crate::browser_finder::{find_browser, show_error};
 
 fn main() {
-    if let Err(e) = run() {
+    if let Err(e) = find_browser() {
         show_error(&e);
     }
 }
