@@ -1,22 +1,20 @@
-use std::env;
-use std::ffi::OsString;
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use walkdir::WalkDir;
-use crate::utils::process;
+use crate::utils::error;
 
 const BROWSER_EXES: &[&str] = &[
-    "chrome.exe",
-    "msedge.exe",
-    "vivaldi.exe",
-    "brave.exe",
-    "browser.exe",
-    "Maxthon.exe",
+    "chrome.exe", 
+    "msedge.exe", 
+    "vivaldi.exe", 
+    "brave.exe", 
+    "browser.exe", 
+    "Maxthon.exe"
 ];
 
 const SEARCH_DIRS: &[&str] = &[
     r"%PROGRAMFILES(x86)%",
-    r"%PROGRAMFILES%",
-    r"%LOCALAPPDATA%",
+    r"%PROGRAMFILES%", 
+    r"%LOCALAPPDATA%"
 ];
 
 pub fn find_browser() -> Result<(), String> {
@@ -27,10 +25,9 @@ pub fn find_browser() -> Result<(), String> {
 
     for exe in BROWSER_EXES {
         if let Some(path) = search_in_dirs(&search_paths, exe) {
-            return process::launch_browser(&path);
+            return utils::process::launch_browser(&path);
         }
     }
-
     Err("No supported browsers found!".into())
 }
 
@@ -42,15 +39,12 @@ fn expand_env_var(dir: &str) -> Option<PathBuf> {
 
 fn search_in_dirs(dirs: &[PathBuf], target: &str) -> Option<PathBuf> {
     for dir in dirs {
-        if !dir.exists() { continue; }
-        
         for entry in WalkDir::new(dir)
-            .min_depth(1)
             .max_depth(5)
             .into_iter()
             .filter_map(|e| e.ok())
         {
-            if entry.file_name() == OsString::from(target) {
+            if entry.file_name() == target {
                 return Some(entry.into_path());
             }
         }
@@ -59,5 +53,5 @@ fn search_in_dirs(dirs: &[PathBuf], target: &str) -> Option<PathBuf> {
 }
 
 pub fn show_error(msg: &str) {
-    utils::error::show_error(msg);
+    error::show_error(msg);
 }
