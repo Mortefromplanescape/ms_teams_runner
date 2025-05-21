@@ -5,23 +5,23 @@ macro_rules! generate_paths {
     ($( ($folder:expr, $exe:expr) ),* ) => {
         [
             $(
-                concat!(r"%PROGRAMFILES(x86)%\", $folder, r"\", $exe),
-                concat!(r"%PROGRAMFILES%\", $folder, r"\", $exe),
-                concat!(r"%LOCALAPPDATA%\", $folder, r"\", $exe),
+                concat!(r#"${PROGRAMFILES(x86)}\"#, $folder, r"\", $exe),
+                concat!(r#"${PROGRAMFILES}\"#, $folder, r"\", $exe),
+                concat!(r#"${LOCALAPPDATA}\"#, $folder, r"\", $exe),
             )*
         ]
     };
 }
 
 pub const BROWSER_PATHS: [&'static str; 30] = generate_paths!(
-    ("Google\\Chrome\\Application", "chrome.exe"),
-    ("Microsoft\\Edge\\Application", "msedge.exe"),
-    ("Chromium\\Application", "chrome.exe"),
-    ("Vivaldi\\Application", "vivaldi.exe"),
-    ("BraveSoftware\\Brave-Browser\\Application", "brave.exe"),
-    ("Yandex\\YandexBrowser\\Application", "browser.exe"),
-    ("Maxthon", "Maxthon.exe"),
-    ("Supermium", "chrome.exe"),
-    ("Microsoft\\Edge Beta\\Application", "msedge.exe"),
-    ("Microsoft\\Edge Dev\\Application", "msedge.exe")
+    (r#"Google\Chrome\Application"#, "chrome.exe"),
+    (r#"Microsoft\Edge\Application"#, "msedge.exe"),
+    (r#"Chromium\Application"#, "chrome.exe"),
+    (r#"Vivaldi\Application"#, "vivaldi.exe"),
+    (r#"BraveSoftware\Brave-Browser\Application"#, "brave.exe"),
+    (r#"Yandex\YandexBrowser\Application"#, "browser.exe"),
+    (r#"Maxthon"#, "Maxthon.exe"),
+    (r#"Supermium"#, "chrome.exe"),
+    (r#"Microsoft\Edge Beta\Application"#, "msedge.exe"),
+    (r#"Microsoft\Edge Dev\Application"#, "msedge.exe")
 );
