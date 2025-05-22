@@ -1,10 +1,10 @@
 mod browser_finder;
 mod utils;
 
-use crate::browser_finder::{find_browser, show_error};
+use crate::browser_finder::find_browser;
 
 fn main() {
     if let Err(e) = find_browser() {
-        show_error(&e);
+        utils::error::show_error(&e);
     }
 }

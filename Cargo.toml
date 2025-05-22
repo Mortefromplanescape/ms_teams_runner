@@ -6,9 +6,9 @@ authors = ["Alexey Boreyko"]
 build = "build.rs"
 
 [dependencies]
-walkdir = "2.3.2"
+walkdir = "2.4.0"
+shellexpand = "3.1.0"
 winapi = { version = "0.3", features = ["winbase", "winuser", "errhandlingapi"] }
-shellexpand = "3.0.0"
 
 [target.'cfg(windows)'.build-dependencies]
 winres = "0.1.12"
