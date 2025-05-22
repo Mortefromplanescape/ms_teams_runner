@@ -4,7 +4,7 @@ use winapi::um::winbase::{CREATE_NO_WINDOW, CREATE_UNICODE_ENVIRONMENT};
 use std::ptr;
 
 pub fn launch_browser(path: &Path) -> Result<(), String> {
-    let url = "https://teams.live.com/v2";
+    let url = "https://web.telegram.org/a/";
     let command = format!("\"{}\" --app=\"{}\"", path.display(), url);
     let mut command_line = to_wide(&command);
     

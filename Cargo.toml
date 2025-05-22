@@ -1,5 +1,5 @@
 [package]
-name = "ms_teams_runner"
+name = "telegram_runner"
 version = "0.1.0"
 edition = "2021"
 authors = ["Alexey Boreyko"]
